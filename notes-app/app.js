@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
-const getNotes = require('./notes.js')
+const notes = require('./notes.js')
 
 //changing yargs version output
 yargs.version('1.12.0') 
@@ -22,9 +22,7 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log('Adding a new note!')
-        console.log('Title = ' + argv.title)
-        console.log('Body = ' + argv.body)
+        notes.addNote(argv.title, argv.body)
     }
 })
 
@@ -56,30 +54,3 @@ yargs.command({
 })
 
 yargs.parse()
-//console.log(yargs.argv)
-
-
-
-
-
-
-
-
-/*
-
-const chalkAnimation = require('chalk-animation')
-
-const name = process.argv[2]
-
-console.log("Hello, " + name + "!")
-console.log("How are you doing?")
-console.log("These are your saved notes:\n")
-
-console.log(chalk.green.bold('Success!'))
-
-if (name === 'Rick') console.log(chalk.green.inverse('Be safe, Ricardo! ;)\n'))
-
-console.log(chalk.cyan.bold('You\'re doing great!\n'))
-
-const msg = getNotes()
-chalkAnimation.rainbow(msg, 0.6).start()*/
