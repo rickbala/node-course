@@ -1,9 +1,14 @@
 const chalk = require('chalk')
 const yargs = require('yargs')
 const notes = require('./notes.js')
+const fs = require('fs')
+
+//read version number from package.json
+const packageJson = JSON.parse(fs.readFileSync('package.json'))
+const version = packageJson.version
 
 //changing yargs version output
-yargs.version('1.12.0') 
+yargs.version(version)
 
 yargs.command({
     command: 'getNotes',
