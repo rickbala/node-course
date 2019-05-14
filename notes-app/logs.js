@@ -1,9 +1,9 @@
 const chalk = require('chalk')
 
 const error = chalk.redBright.bold
-const warning = chalk.yellowBright.bold
+const success = chalk.greenBright.bold.inverse
 
 module.exports = {
     error: error,
-    warning: warning
+    success: success
 }

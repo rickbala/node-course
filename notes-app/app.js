@@ -15,7 +15,7 @@ yargs.version(version)
 yargs.command({
     command: 'getNotes',
     handler(){
-        console.log(logs.error(notes.getNotes()))
+        console.log(logs.success(notes.getNotes()))
     }
 })
 

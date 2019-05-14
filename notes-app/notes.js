@@ -1,11 +1,11 @@
 const fs = require('fs')
 const chalk = require('chalk')
+const logs = require('./logs.js')
 
 const getNotes = () => "Your notes..."
 
 const addNote = (title, body) => {
     const notes = loadNotes()
-    //const duplicateNotes = notes.filter((note) => note.title === title)
     const duplicateNote = notes.find((note) => note.title === title)
     
     if (!duplicateNote){
@@ -14,9 +14,9 @@ const addNote = (title, body) => {
             body: body
         })
         saveNotes(notes)
-        console.log(chalk.green.inverse('New note added!'))
+        console.log(logs.success('New note added!'))
     }else{
-        console.log(chalk.red.inverse('Note title taken'))
+        console.log(logs.error('Note title taken'))
     }
 }
 
@@ -25,10 +25,10 @@ const removeNote = (title) => {
     const notesToKeepSaved = notes.filter((note) => note.title !== title)
 
     if (notes.length > notesToKeepSaved.length){
-        console.log(chalk.green.inverse('Note removed!'))
+        console.log(logs.success('Note removed!'))
         saveNotes(notesToKeepSaved)
     }else{
-        console.log(chalk.red.inverse('No note found!'))
+        console.log(logs.error('No note found!'))
     }
 }
 
@@ -49,7 +49,7 @@ const loadNotes = () => {
 
 const listNotes = () => {
     const notes = loadNotes()
-    console.log(chalk.yellow.bold("Your notes"))
+    console.log(logs.success("Your notes"))
     notes.forEach((note) => console.log(note.title))
 }
 
@@ -57,10 +57,10 @@ const readNote = (title) => {
     const notes = loadNotes()
     const note = notes.find((note) => note.title === title)
     if (note) {
-        console.log(chalk.inverse.green(note.title))
+        console.log(logs.success(note.title))
         console.log(note.body)
     }else{
-        console.log(chalk.inverse.red('Note not found'))
+        console.log(logs.error('Note not found'))
     }
 }
 
