@@ -11,7 +11,5 @@ request({url: url, json: true}, (error, response) => {
     const chance = data.precipProbability
     const daily = response.body.daily
     const summary = daily.data[0].summary
-    console.log(summary + ' It is currently '+ degrees +' out. There is a '+ chance +'% chance of rain.')
+    console.log(summary + '\nIt is currently '+ degrees +'°C out. There is a '+ chance +'% chance of rain.')
 })
-
-
