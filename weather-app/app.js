@@ -1,9 +1,24 @@
-const request = require('request')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
 
-const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoicmljYXJkb3YiLCJhIjoiY2p2enk1YjJnMDVibTRhcXFpenIwOTdoYiJ9.uYYRBRSHAynIHipBr9R-SA&limit=1'
+const address = process.argv[2]
 
-request({url: url, json: true}, (error, response) => {
-    const latitude = response.body.features[0].geometry.coordinates[0]
-    const longitude = response.body.features[0].geometry.coordinates[1]
-    console.log('Latitude: ' + latitude + ', Longitude: ' + longitude)
-})
+if (!address) {
+    return console.log('No address provided')
+} else {
+    geocode(address, (error, data) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        forecast(data.latitude, data.longitude, (error, forecastData) => {
+            if (error) {
+                return console.log(error)
+            }
+
+            console.log(data.location)
+            console.log(forecastData)
+        })
+    })
+
+}

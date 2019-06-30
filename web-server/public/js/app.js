@@ -1,0 +1,1 @@
+console.log("js file loaded from public/js")
